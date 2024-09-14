@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android' // Apply the Hilt plugin
 }
-
-apply plugin: 'kotlin-kapt'
 
 android {
     namespace 'com.example.merqurinotes'
@@ -32,6 +32,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
+    }
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
@@ -48,4 +56,7 @@ dependencies {
     // Hilt
     implementation libs.hilt.android
     kapt libs.hilt.compiler
+
+    // ViewModel
+    implementation libs.androidx.lifecycle.viewmodel.ktx
 }
