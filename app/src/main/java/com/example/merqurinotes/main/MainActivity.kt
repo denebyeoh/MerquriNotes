@@ -33,22 +33,22 @@ class MainActivity : BaseAppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initView()
+        //initView()
     }
 
-    private fun initView() {
-        val activity = this
-        binding.apply {
-            customToolBar.settingsButton.setOnClickListener {
-                SettingsActivity.start(activity)
-            }
-
-            customBottomBar.addNotesContainer.setOnClickListener {
-                AddNotesActivity.start(activity)
-            }
-
-            customToolBar.backButton.visibility = View.GONE
-            customToolBar.titleText.text = "Home"
-        }
-    }
+//    private fun initView() {
+//        val activity = this
+//        binding.apply {
+//            customToolBar.settingsButton.setOnClickListener {
+//                SettingsActivity.start(activity)
+//            }
+//
+//            customBottomBar.addNotesContainer.setOnClickListener {
+//                AddNotesActivity.start(activity)
+//            }
+//
+//            customToolBar.backButton.visibility = View.GONE
+//            customToolBar.titleText.text = "Home"
+//        }
+//    }
 }
