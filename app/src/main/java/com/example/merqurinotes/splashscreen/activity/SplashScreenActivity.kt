@@ -5,12 +5,10 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.merqurinotes.MainActivity
+import com.example.merqurinotes.main.MainActivity
 import com.example.merqurinotes.R
 import com.example.merqurinotes.room.Category
 import com.example.merqurinotes.databinding.ActivitySplashScreenBinding
-import com.example.merqurinotes.notes.activity.AddNotesActivity
-import com.example.merqurinotes.notes.viewmodel.AddNotesViewModel
 import com.example.merqurinotes.splashscreen.viewmodel.SplashScreenViewModel
 import com.example.merqurinotes.utils.api.ApiResource
 import com.example.merqurinotes.utils.dialog.DialogUtils
