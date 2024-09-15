@@ -5,16 +5,33 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/merquri_notes_main_background"
     tools:context=".splashscreen.activity.SplashScreenActivity">
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/circularImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/merquri_logo"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/CustomShapeAppearance.Circular"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
-        android:id="@+id/splash_screen_tv"
+        android:id="@+id/status_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test"
+        android:text="Loading...."
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/circularImageView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,19 +1,19 @@
 package com.example.merqurinotes.splashscreen.activity
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.merqurinotes.MainActivity
 import com.example.merqurinotes.R
-import com.example.merqurinotes.databinding.ActivityMainBinding
+import com.example.merqurinotes.room.Category
 import com.example.merqurinotes.databinding.ActivitySplashScreenBinding
+import com.example.merqurinotes.notes.activity.AddNotesActivity
+import com.example.merqurinotes.notes.viewmodel.AddNotesViewModel
 import com.example.merqurinotes.splashscreen.viewmodel.SplashScreenViewModel
+import com.example.merqurinotes.utils.api.ApiResource
+import com.example.merqurinotes.utils.dialog.DialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")
@@ -25,31 +25,148 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-//        setContentView(R.layout.activity_splash_screen)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
+
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initViewModel()
-        viewModel.fetchTestData()
+        //viewModel.fetchDataFromAPI()
+        viewModel.fetchCategoryListFromDB()
     }
+
 
     private fun initViewModel() {
         val activity = this
         viewModel.apply {
-            retrieveTestResponse.observe(
+            retrieveDataResponse.observe(
                 activity,
-                activity::onRetrieveTestResponse
+                activity::onRetrieveDataFromAPIResponse
+            )
+            retrieveCategoryListResponse.observe(
+                activity,
+                activity::onRetrieveCategoryFromDBResponse
+            )
+            retrieveInsertCategoryToDBResponse.observe(
+                activity,
+                activity::onRetrieveInsertCategoryResponse
             )
         }
     }
 
-    private fun onRetrieveTestResponse(b: Boolean?) {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+    private fun onRetrieveInsertCategoryResponse(response: ApiResource<Boolean>?) {
+        val activity = this@SplashScreenActivity
+        when (response) {
+            is ApiResource.Loading -> {
+                binding.statusText.text = "Loading..."
+            }
+
+            is ApiResource.Success -> {
+                binding.statusText.text = "Load Completed"
+                if(response.data){
+                    MainActivity.start(activity)
+                    finish()
+                }
+            }
+
+            is ApiResource.Error -> {
+                binding.statusText.text = "Error"
+                DialogUtils.showSimpleOkDialog(
+                    activity,
+                    title = getString(R.string.dialog_title_error),
+                    message = getString(R.string.generic_error_msg),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                        finish()
+                    },
+                )
+            }
+            else -> {}
+        }
     }
+
+    private fun onRetrieveCategoryFromDBResponse(response: ApiResource<List<Category>>?) {
+        val activity = this@SplashScreenActivity
+        when (response) {
+            is ApiResource.Loading -> {
+                binding.statusText.text = "Loading..."
+            }
+
+            is ApiResource.Success -> {
+                //DialogUtils.shutDownLoadingDialog()
+                if(response.data.isEmpty()){
+                    viewModel.insertCategoryToDB()
+                }else{
+                    binding.statusText.text = "Load Completed"
+                    MainActivity.start(activity)
+                    //AddNotesActivity.start(activity)
+                    finish()
+                }
+            }
+
+            is ApiResource.Error -> {
+                binding.statusText.text = "Error"
+                DialogUtils.showSimpleOkDialog(
+                    activity,
+                    title = getString(R.string.dialog_title_error),
+                    message = getString(R.string.generic_error_msg),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                        finish()
+                    },
+                )
+            }
+            else -> {}
+        }
+    }
+
+    private fun onRetrieveDataFromAPIResponse(response: ApiResource<Boolean>?) {
+        val activity = this@SplashScreenActivity
+        when (response) {
+            is ApiResource.Loading -> {
+                //DialogUtils.showLoadingDialog(activity)
+                binding.statusText.text = "Loading..."
+            }
+
+            is ApiResource.Success -> {
+                //DialogUtils.shutDownLoadingDialog()
+                binding.statusText.text = "Load Completed"
+                MainActivity.start(activity)
+                finish()
+            }
+
+            is ApiResource.Error -> {
+                binding.statusText.text = "Error"
+                //DialogUtils.shutDownLoadingDialog()
+//                NewDialogUtils.popSimpleOkayDialog(
+//                    activity,
+//                    DialogHandler.TEXT_NOTICE_ZH,
+//                    getString(R.string.generic_error)
+//                )
+//                DialogUtils.showSimpleOkDialog(
+//                    activity,
+//                    title = "Warning",
+//                    message = "Are you sure you want to delete this?",
+//                    positiveButtonText = "Yes",
+//                    negativeButtonText = "No",
+//                    positiveButtonAction = {
+//                        // Positive action (e.g., delete an item)
+//                    },
+//                    negativeButtonAction = {
+//                        // Negative action (e.g., cancel)
+//                    }
+//                )
+                DialogUtils.showSimpleOkDialog(
+                    activity,
+                    title = getString(R.string.dialog_title_error),
+                    message = getString(R.string.generic_error_msg),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                        finish()
+                    },
+                )
+            }
+
+            else -> {}
+        }
+    }
+
 }

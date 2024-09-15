@@ -1,3 +1,34 @@
 <resources>
-    <string name="app_name">merquriNotes</string>
+    <string name="app_name">Merquri Notes</string>
+
+    <!--Title Bar-->
+    <string name="title_icon_back">Back</string>
+    <!---->
+
+    <!--Error Message-->
+    <string name="generic_error_msg">An unexpected error occurred. Please try again later.</string>
+    <!---->
+
+    <!--Dialog-->
+    <string name="dialog_title">Title</string>
+    <string name="dialog_sub_title">Sub-Title</string>
+    <string name="dialog_title_error">Error</string>
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <!---->
+
+    <!--Bottom Bar-->
+    <string name="bottom_bar_home">Home</string>
+    <string name="bottom_bar_summar">Summary</string>
+    <string name="summary">Summary</string>
+    <string name="home">Home</string>
+    <string name="add">Add</string>
+    <!---->
+
+    <string-array name="category_array">
+        <item>Work and Study</item>
+        <item>Life</item>
+        <item>Health and Well-being</item>
+    </string-array>
+
 </resources>

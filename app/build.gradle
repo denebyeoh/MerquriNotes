@@ -59,4 +59,14 @@ dependencies {
 
     // ViewModel
     implementation libs.androidx.lifecycle.viewmodel.ktx
+
+    //GSON
+    implementation libs.gson
+
+    //Room
+    implementation libs.androidx.room.ktx
+    implementation libs.androidx.room.runtime   // Replace version with the latest
+    kapt libs.androidx.room.compiler           // Room annotation processor for Kotlin
+
+
 }
