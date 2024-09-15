@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseAppCompatActivity() {
-    private val viewModel : MainViewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
+    private val viewModel: MainViewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
     private lateinit var binding: ActivityMainBinding
 
     companion object {

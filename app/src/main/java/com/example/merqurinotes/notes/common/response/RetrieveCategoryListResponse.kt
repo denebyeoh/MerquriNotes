@@ -13,31 +13,22 @@ data class RetrieveCategoryListResponse(
     }
 }
 
-
 data class CategoryList(
     var category: String = ""
 )
 
 private const val TEST_JSON = """
 {
-  "responseData": {
-    "banks": [
+  "data":[
       {
-        "bankCode": "XYZBANKXXXX",
-        "bankName": "XYZ Bank",
-        "segment": "Retail"
+        "category": "Work and study",
       },
       {
-        "bankCode": "ABCBANKXXXX",
-        "bankName": "ABC Bank",
-        "segment": "Retail"
+        "category": "Life",
       },
       {
-        "bankCode": "ROBBANKXXXX",
-        "bankName": "Robinsons Bank",
-        "segment": "Retail"
+        "category": "Healthy and well-being",
       }
     ]
-  }
 }
 """

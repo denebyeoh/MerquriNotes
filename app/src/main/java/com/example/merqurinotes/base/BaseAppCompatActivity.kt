@@ -1,7 +1,6 @@
 package com.example.merqurinotes.base
 
 import android.os.Bundle
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.merqurinotes.R
@@ -26,7 +25,7 @@ abstract class BaseAppCompatActivity : AppCompatActivity() {
         footer.visibility = ConstraintLayout.VISIBLE
     }
 
-    fun setToolbarTitle(visible: Boolean){
+    fun setToolbarTitle(visible: Boolean) {
         footer.visibility = if (visible) ConstraintLayout.VISIBLE else ConstraintLayout.GONE
     }
 

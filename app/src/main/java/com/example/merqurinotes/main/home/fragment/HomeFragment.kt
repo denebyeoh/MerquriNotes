@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.merqurinotes.R
 import com.example.merqurinotes.databinding.FragmentHomeBinding
 import com.example.merqurinotes.main.adapter.HealthListAdapter
+import com.example.merqurinotes.main.adapter.LifeListAdapter
+import com.example.merqurinotes.main.adapter.WorkStudyListAdapter
 import com.example.merqurinotes.main.viewmodel.MainViewModel
 import com.example.merqurinotes.notes.activity.AddNotesActivity
 import com.example.merqurinotes.room.Content
@@ -182,7 +184,7 @@ class HomeFragment : Fragment() {
             if (data.isEmpty()) homeBinding.lifeTitleContainer.visibility = View.GONE
             else homeBinding.lifeTitleContainer.visibility = View.VISIBLE
             lifeRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
-            val adapter = HealthListAdapter(data)
+            val adapter = LifeListAdapter(data)
             lifeRecyclerView.adapter = adapter
         }
     }
@@ -192,7 +194,7 @@ class HomeFragment : Fragment() {
             if (data.isEmpty()) homeBinding.workStudyTitleContainer.visibility = View.GONE
             else homeBinding.workStudyTitleContainer.visibility = View.VISIBLE
             workStudyRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
-            val adapter = HealthListAdapter(data)
+            val adapter = WorkStudyListAdapter(data)
             workStudyRecyclerView.adapter = adapter
         }
     }

@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.merqurinotes.R
 import com.example.merqurinotes.base.model.SummarizeData
-import com.example.merqurinotes.databinding.ListSummarizeCategoryItemBinding
 
 class SummaryListAdapter(private val mList: List<SummarizeData>) :
     RecyclerView.Adapter<SummaryListAdapter.ViewHolder>() {
@@ -67,10 +66,11 @@ class SummaryListAdapter(private val mList: List<SummarizeData>) :
         val categoryTextView: TextView = this.itemView.findViewById(R.id.category_tv)
         val totalContentTextView: TextView = this.itemView.findViewById(R.id.total_content_tv)
         val categoryImageView: ImageView = this.itemView.findViewById(R.id.category_iv)
+
         init {
-            val detailButton : AppCompatButton = this.itemView.findViewById(R.id.details_btn)
+            val detailButton: AppCompatButton = this.itemView.findViewById(R.id.details_btn)
             detailButton.setOnClickListener {
-                Toast.makeText(this.itemView.context,"Pressed",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.itemView.context, "Pressed", Toast.LENGTH_SHORT).show()
             }
         }
     }

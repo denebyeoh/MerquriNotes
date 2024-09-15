@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.merqurinotes.R
 import com.example.merqurinotes.room.Content
+
 class LifeListAdapter(private val mList: List<Content>) :
     RecyclerView.Adapter<LifeListAdapter.ViewHolder>() {
 

@@ -97,6 +97,7 @@ class GenericDialogFragment :
                     okButton.setOnClickListenerWithDismiss { proceedCallback?.onReturn(0) }
                     okButton.setOnClickListenerWithDismiss {}
                 }
+
                 Mode.POSITIVE_NEGATIVE -> {
                     toggleNegativeButton(true)
                     toggleTwoButtonLayout(true)
@@ -114,6 +115,7 @@ class GenericDialogFragment :
                         )
                     }
                 }
+
                 Mode.THREE_ACTION -> {
                     toggleNegativeButton(false)
                     toggleTwoButtonLayout(false)
@@ -134,6 +136,7 @@ class GenericDialogFragment :
                         )
                     }
                 }
+
                 Mode.TWO_ACTION_ALL_BLUE -> {
                     toggleNegativeButton(false)
                     toggleTwoButtonLayout(false)
@@ -150,6 +153,7 @@ class GenericDialogFragment :
                     }
                     actionNegativeButton.visibility = View.GONE
                 }
+
                 Mode.TWO_ACTION_WITH_GRAY -> {
                     toggleNegativeButton(false)
                     toggleTwoButtonLayout(false)
