@@ -3,12 +3,18 @@ package com.example.merqurinotes.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.example.merqurinotes.base.BaseAppCompatActivity
 import com.example.merqurinotes.databinding.ActivityMainBinding
+import com.example.merqurinotes.main.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : BaseAppCompatActivity() {
-
+    private val viewModel : MainViewModel by lazy { ViewModelProvider(this)[MainViewModel::class.java] }
     private lateinit var binding: ActivityMainBinding
+
     companion object {
         fun start(
             context: Context,
@@ -23,22 +29,5 @@ class MainActivity : BaseAppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //initView()
     }
-
-//    private fun initView() {
-//        val activity = this
-//        binding.apply {
-//            customToolBar.settingsButton.setOnClickListener {
-//                SettingsActivity.start(activity)
-//            }
-//
-//            customBottomBar.addNotesContainer.setOnClickListener {
-//                AddNotesActivity.start(activity)
-//            }
-//
-//            customToolBar.backButton.visibility = View.GONE
-//            customToolBar.titleText.text = "Home"
-//        }
-//    }
 }

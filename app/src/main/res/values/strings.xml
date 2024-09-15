@@ -1,18 +1,34 @@
 <resources>
     <string name="app_name">Merquri Notes</string>
 
-    <!--Title Bar-->
+    <!--Toolbar Bar-->
     <string name="title_icon_back">Back</string>
+    <string name="title_home_tool_bar">Home</string>
+    <string name="title_settings_tool_bar">Settings</string>
+    <string name="title_add_notes_tool_bar">New Notes</string>
+    <!---->
+
+    <!--Home Page-->
+    <string name="work_study_title">Work and study</string>
+    <string name="life_title">Life</string>
+    <string name="health_title">Health and well-being</string>
+    <!---->
+
+    <!--Button-->
+    <string name="save">Save</string>
+    <string name="detail">Details</string>
     <!---->
 
     <!--Error Message-->
     <string name="generic_error_msg">An unexpected error occurred. Please try again later.</string>
+    <string name="empty_content">Please input content in-order to save it.</string>
     <!---->
 
     <!--Dialog-->
     <string name="dialog_title">Title</string>
     <string name="dialog_sub_title">Sub-Title</string>
     <string name="dialog_title_error">Error</string>
+    <string name="dialog_title_note">Note</string>
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_cancel">Cancel</string>
     <!---->
@@ -23,6 +39,21 @@
     <string name="summary">Summary</string>
     <string name="home">Home</string>
     <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <!---->
+
+    <!--Statement-->
+    <string name="summarize_count_statement">This topic has a total %d records.</string>
+    <string name="notes_cleared_statement">All notes have been cleared</string>
+    <string name="content_saved_successful_statement">Your content has been saved successfully.</string>
+    <!---->
+
+    <!--Questions-->
+    <string name="delete_all_content_question">Do you wish to delete all the content?</string>
+    <!---->
+
+    <!--Hint-->
+    <string name="please_input_note_content_hint">Please input note content</string>
     <!---->
 
     <string-array name="category_array">
@@ -30,7 +61,5 @@
         <item>Life</item>
         <item>Health and Well-being</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

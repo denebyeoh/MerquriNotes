@@ -27,4 +27,7 @@ interface ContentDao {
 
     @Query("DELETE FROM content_table")
     suspend fun deleteAllContent()
+
+    @Query("SELECT * FROM content_table WHERE category = :c ORDER BY unixTime DESC LIMIT 3")
+    suspend fun getContentByCategory(c: String): List<Content>
 }

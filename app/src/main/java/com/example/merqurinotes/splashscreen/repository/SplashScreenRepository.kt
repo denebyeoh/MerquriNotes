@@ -13,7 +13,7 @@ import javax.inject.Inject
 class SplashScreenRepository @Inject constructor(ctxObj : Application) : BaseRepository(ctxObj) {
     suspend fun insertCategoryToDB(responseHandler : (ApiResource<Boolean>) -> Unit){
         val database = AppDatabase.getDatabase(ctxObj)
-        val category = arrayOf("Work and Study", "Life", "Health and Well-being")
+        val category = arrayOf("Work and Study", "Life", "Health and wellness")
         for (c in category) {
             database.categoryDao().insertCategory(Category(category = c))
         }

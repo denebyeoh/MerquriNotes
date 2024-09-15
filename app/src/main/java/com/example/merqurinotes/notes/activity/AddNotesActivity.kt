@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.merqurinotes.R
@@ -20,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddNotesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddNotesBinding
-    private val viewModel : AddNotesViewModel by lazy { ViewModelProvider(this)[AddNotesViewModel::class.java] }
+    private val viewModel: AddNotesViewModel by lazy { ViewModelProvider(this)[AddNotesViewModel::class.java] }
 
     companion object {
         fun start(
@@ -61,18 +60,15 @@ class AddNotesActivity : AppCompatActivity() {
 
             is ApiResource.Success -> {
                 DialogUtils.shutDownLoadingDialog()
-                if(response.data) Toast.makeText(activity,"Saved successfully",Toast.LENGTH_SHORT).show()
-                else{
-                    DialogUtils.showSimpleOkDialog(
-                        activity,
-                        title = getString(R.string.dialog_title_error),
-                        message = getString(R.string.generic_error_msg),
-                        positiveButtonText = getString(R.string.dialog_button_ok),
-                        positiveButtonAction = {
-                            finish()
-                        },
-                    )
-                }
+                DialogUtils.showSimpleOkDialog(
+                    activity,
+                    title = getString(R.string.dialog_title_note),
+                    message = getString(R.string.content_saved_successful_statement),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                        binding.noteContentEt.text.clear()
+                    },
+                )
             }
 
             is ApiResource.Error -> {
@@ -130,18 +126,34 @@ class AddNotesActivity : AppCompatActivity() {
     private fun initView() {
         binding.apply {
             toolbar.settingsButton.visibility = View.GONE
-            toolbar.titleText.text = "New Notes"
+            toolbar.titleText.text = getString(R.string.title_add_notes_tool_bar)
             toolbar.backButton.setOnClickListener { finish() }
 
-            bottomSaveButton.btnSaveDelete.text = "Save"
+            bottomSaveButton.btnSaveDelete.text = getString(R.string.save)
             bottomSaveButton.btnSaveDelete.setOnClickListener {
-                val inputContent = etNoteContent.text.toString()
-                val inputCategory = spinnerCategory.selectedItem.toString()
-                val content = Content(
-                    category = inputCategory,
-                    content = inputContent
-                )
-                viewModel.saveNotesToDB(content)
+                if (noteContentEt.text.toString()
+                        .isBlank() || spinnerCategory.selectedItem.toString().isBlank()
+                ) {
+                    DialogUtils.showSimpleOkDialog(
+                        this@AddNotesActivity,
+                        title = getString(R.string.dialog_title_error),
+                        message = getString(R.string.empty_content),
+                        positiveButtonText = getString(R.string.dialog_button_ok),
+                        positiveButtonAction = {
+                        },
+                    )
+                } else {
+                    //val array = resources.getStringArray(R.array.category_array)
+                    val inputContent = noteContentEt.text.toString()
+                    val inputCategory = spinnerCategory.selectedItem.toString()
+                    val content = Content(
+                        category = inputCategory,
+                        //category = array.random(),
+                        content = inputContent
+                    )
+                    viewModel.saveNotesToDB(content)
+                }
+
             }
         }
     }

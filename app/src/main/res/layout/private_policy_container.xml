@@ -17,7 +17,7 @@
         android:id="@+id/arrow_icon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/settings_icon"
+        android:src="@drawable/private_policy_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

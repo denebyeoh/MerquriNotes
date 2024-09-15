@@ -69,7 +69,7 @@ object DialogUtils {
         dialog.show()
     }
 
-    fun showDialog(
+    fun showNormalDialog(
         context: Context,
         title: String = "Alert",
         message: String = "This is a message",

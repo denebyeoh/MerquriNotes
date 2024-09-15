@@ -8,4 +8,6 @@
     <color name="colorAccent">#03DAC5</color> <!-- Accent color -->
 
     <color name="colorTitleBarBackground">#280840</color>
+
+    <color name="pink">#F94695</color>
 </resources>

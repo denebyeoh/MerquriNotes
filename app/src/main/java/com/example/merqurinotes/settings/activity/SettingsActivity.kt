@@ -2,6 +2,7 @@ package com.example.merqurinotes.settings.activity
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,11 +15,13 @@ import com.example.merqurinotes.utils.api.ApiResource
 import com.example.merqurinotes.utils.dialog.DialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
-    private val viewModel : SettingsViewModel by lazy { ViewModelProvider(this)[SettingsViewModel::class.java] }
+    private val viewModel: SettingsViewModel by lazy { ViewModelProvider(this)[SettingsViewModel::class.java] }
+
     companion object {
         fun start(
             context: Context,
@@ -26,6 +29,7 @@ class SettingsActivity : AppCompatActivity() {
             context.startActivity(Intent(context, SettingsActivity::class.java))
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
@@ -33,6 +37,7 @@ class SettingsActivity : AppCompatActivity() {
         initView()
         initViewModel()
     }
+
     private fun initView() {
         val activity = this
         binding.apply {
@@ -41,35 +46,51 @@ class SettingsActivity : AppCompatActivity() {
                 finish()
             }
             customActionBar.settingsButton.visibility = View.GONE
-            customActionBar.titleText.text = "Settings"
+            customActionBar.titleText.text = getString(R.string.title_settings_tool_bar)
             //------------------------------------------------------------
 
             //----------------------Container-----------------------------
             onlineCustomerLl.onlineCustomerContainer.setOnClickListener {
-                Toast.makeText(activity,"Online Customer Clicked",Toast.LENGTH_SHORT).show()
+                intentToWeb("https://www.merquri.io/contact")
             }
 
             userAgreementLl.userAgreementContainer.setOnClickListener {
-                Toast.makeText(activity,"User Agreement Clicked",Toast.LENGTH_SHORT).show()
+                intentToWeb("https://www.merquri.io/services/app")
             }
 
             privatePolicyLl.privatePolicyContainer.setOnClickListener {
-                Toast.makeText(activity,"Private Policy Clicked",Toast.LENGTH_SHORT).show()
+                intentToWeb("https://www.merquri.io/")
             }
 
             aboutUsLl.aboutUsContainer.setOnClickListener {
-                Toast.makeText(activity,"About Us Clicked",Toast.LENGTH_SHORT).show()
+                intentToWeb("https://www.merquri.io/about/us")
             }
             //------------------------------------------------------------
 
             //----------------------Bottom Bar-----------------------------
-            customBottomBar.btnSaveDelete.text = "Delete"
+            customBottomBar.btnSaveDelete.text = getString(R.string.delete)
             customBottomBar.btnSaveDelete.setOnClickListener {
-                viewModel.deleteAllContent()
+                DialogUtils.showNormalDialog(
+                    activity,
+                    title = getString(R.string.dialog_title_note),
+                    message = getString(R.string.delete_all_content_question),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                        viewModel.deleteAllContent()
+                    },
+                    negativeButtonText = getString(R.string.dialog_button_cancel),
+                    negativeButtonAction = {
+                    }
+                )
             }
             //------------------------------------------------------------
         }
     }
+
+    fun intentToWeb(url:String){
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    }
+
     private fun initViewModel() {
         val activity = this
         viewModel.apply {
@@ -89,6 +110,14 @@ class SettingsActivity : AppCompatActivity() {
 
             is ApiResource.Success -> {
                 DialogUtils.shutDownLoadingDialog()
+                DialogUtils.showSimpleOkDialog(
+                    activity,
+                    title = getString(R.string.dialog_title_note),
+                    message = getString(R.string.notes_cleared_statement),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                    },
+                )
             }
 
             is ApiResource.Error -> {
@@ -99,10 +128,10 @@ class SettingsActivity : AppCompatActivity() {
                     message = getString(R.string.generic_error_msg),
                     positiveButtonText = getString(R.string.dialog_button_ok),
                     positiveButtonAction = {
-                        finish()
                     },
                 )
             }
+
             else -> {}
         }
     }

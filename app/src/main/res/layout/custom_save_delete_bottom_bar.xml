@@ -14,18 +14,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginVertical="10dp"
+        android:paddingHorizontal="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_save_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_save_delete_background"
             android:text="Save"
-            android:textColor="@android:color/white"
-            android:layout_margin="16dp"
-            android:background="@drawable/button_save_delete_background"/>
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
