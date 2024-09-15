@@ -16,22 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class AddNotesViewModel @Inject constructor(repository: AddNotesRepository) : BaseViewModel<AddNotesRepository>(repository){
 
-    private val retrieveListCategoryResponseInternal = MutableLiveData<ApiResource<RetrieveCategoryListResponse>>()
-    val retrieveListCategoryResponse : LiveData<ApiResource<RetrieveCategoryListResponse>?>
-        get() = retrieveListCategoryResponseInternal
-
     private val retrieveSaveNotesResponseInternal = MutableLiveData<ApiResource<Boolean>>()
     val retrieveSaveNotesResponse : LiveData<ApiResource<Boolean>?>
         get() = retrieveSaveNotesResponseInternal
-
-    fun fetchListCategoryFromAPI(){
-        retrieveListCategoryResponseInternal.postValue(ApiResource.Loading)
-        viewModelScope.launch (Dispatchers.IO){
-            repository.fetchListCategoryFromAPI {
-                retrieveListCategoryResponseInternal.postValue(it)
-            }
-        }
-    }
 
     fun saveNotesToDB(content: Content){
         retrieveSaveNotesResponseInternal.postValue(ApiResource.Loading)

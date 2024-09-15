@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/custom_bottom_bar"
     android:layout_width="match_parent"
@@ -8,37 +7,39 @@
     android:background="@drawable/bottom_bar_curved_upper_shape"
     android:padding="16dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
 
     <!-- Home Button with Icon and Label -->
     <LinearLayout
         android:id="@+id/home_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginStart="10dp"
         android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/home_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/home_undim_icon"
-            android:contentDescription="@string/home" />
+            android:contentDescription="@string/home"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:src="@drawable/home_undim_icon" />
 
         <TextView
             android:id="@+id/home_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:gravity="center"
             android:text="@string/home"
             android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:gravity="center"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
     <!-- Add Button with Icon and Label (Center Button) -->
@@ -47,19 +48,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@id/home_container"
-        app:layout_constraintEnd_toStartOf="@id/summary_container"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5">
+        app:layout_constraintEnd_toStartOf="@id/summary_container"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/home_container"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/add_button"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/add_note_icon"
             android:layout_margin="16dp"
-            android:contentDescription="@string/add" />
+            android:contentDescription="@string/add"
+            android:src="@drawable/add_note_icon" />
 
     </LinearLayout>
 
@@ -68,29 +69,31 @@
         android:id="@+id/summary_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/summary_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/summary_dim_icon"
-            android:contentDescription="@string/summary" />
+            android:contentDescription="@string/summary"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:src="@drawable/summary_dim_icon" />
 
         <TextView
             android:id="@+id/summary_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:gravity="center"
             android:text="@string/summary"
             android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:gravity="center"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

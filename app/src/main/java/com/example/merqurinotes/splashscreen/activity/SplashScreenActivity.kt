@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.merqurinotes.main.MainActivity
 import com.example.merqurinotes.R
-import com.example.merqurinotes.room.Category
 import com.example.merqurinotes.databinding.ActivitySplashScreenBinding
+import com.example.merqurinotes.main.MainActivity
+import com.example.merqurinotes.room.Category
 import com.example.merqurinotes.splashscreen.viewmodel.SplashScreenViewModel
 import com.example.merqurinotes.utils.api.ApiResource
 import com.example.merqurinotes.utils.dialog.DialogUtils
@@ -18,27 +18,24 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
 
-    private val viewModel : SplashScreenViewModel by lazy { ViewModelProvider(this)[SplashScreenViewModel::class.java] }
+    private val viewModel: SplashScreenViewModel by lazy { ViewModelProvider(this)[SplashScreenViewModel::class.java] }
     private lateinit var binding: ActivitySplashScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViewModel()
-        //viewModel.fetchDataFromAPI()
-        viewModel.fetchCategoryListFromDB()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchCategoryListFromDB()
+    }
 
     private fun initViewModel() {
         val activity = this
         viewModel.apply {
-            retrieveDataResponse.observe(
-                activity,
-                activity::onRetrieveDataFromAPIResponse
-            )
             retrieveCategoryListResponse.observe(
                 activity,
                 activity::onRetrieveCategoryFromDBResponse
@@ -54,19 +51,19 @@ class SplashScreenActivity : AppCompatActivity() {
         val activity = this@SplashScreenActivity
         when (response) {
             is ApiResource.Loading -> {
-                binding.statusText.text = "Loading..."
+                binding.statusText.text = getString(R.string.loading_status)
             }
 
             is ApiResource.Success -> {
-                binding.statusText.text = "Load Completed"
-                if(response.data){
+                binding.statusText.text = getString(R.string.load_completed_status)
+                if (response.data) {
                     MainActivity.start(activity)
                     finish()
                 }
             }
 
             is ApiResource.Error -> {
-                binding.statusText.text = "Error"
+                binding.statusText.text = getString(R.string.error_status)
                 DialogUtils.showSimpleOkDialog(
                     activity,
                     title = getString(R.string.dialog_title_error),
@@ -77,6 +74,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     },
                 )
             }
+
             else -> {}
         }
     }
@@ -85,73 +83,21 @@ class SplashScreenActivity : AppCompatActivity() {
         val activity = this@SplashScreenActivity
         when (response) {
             is ApiResource.Loading -> {
-                binding.statusText.text = "Loading..."
+                binding.statusText.text = getString(R.string.loading_status)
             }
 
             is ApiResource.Success -> {
-                //DialogUtils.shutDownLoadingDialog()
-                if(response.data.isEmpty()){
+                if (response.data.isEmpty()) {
                     viewModel.insertCategoryToDB()
-                }else{
-                    binding.statusText.text = "Load Completed"
+                } else {
+                    binding.statusText.text = getString(R.string.load_completed_status)
                     MainActivity.start(activity)
-                    //AddNotesActivity.start(activity)
                     finish()
                 }
             }
 
             is ApiResource.Error -> {
-                binding.statusText.text = "Error"
-                DialogUtils.showSimpleOkDialog(
-                    activity,
-                    title = getString(R.string.dialog_title_error),
-                    message = getString(R.string.generic_error_msg),
-                    positiveButtonText = getString(R.string.dialog_button_ok),
-                    positiveButtonAction = {
-                        finish()
-                    },
-                )
-            }
-            else -> {}
-        }
-    }
-
-    private fun onRetrieveDataFromAPIResponse(response: ApiResource<Boolean>?) {
-        val activity = this@SplashScreenActivity
-        when (response) {
-            is ApiResource.Loading -> {
-                //DialogUtils.showLoadingDialog(activity)
-                binding.statusText.text = "Loading..."
-            }
-
-            is ApiResource.Success -> {
-                //DialogUtils.shutDownLoadingDialog()
-                binding.statusText.text = "Load Completed"
-                MainActivity.start(activity)
-                finish()
-            }
-
-            is ApiResource.Error -> {
-                binding.statusText.text = "Error"
-                //DialogUtils.shutDownLoadingDialog()
-//                NewDialogUtils.popSimpleOkayDialog(
-//                    activity,
-//                    DialogHandler.TEXT_NOTICE_ZH,
-//                    getString(R.string.generic_error)
-//                )
-//                DialogUtils.showSimpleOkDialog(
-//                    activity,
-//                    title = "Warning",
-//                    message = "Are you sure you want to delete this?",
-//                    positiveButtonText = "Yes",
-//                    negativeButtonText = "No",
-//                    positiveButtonAction = {
-//                        // Positive action (e.g., delete an item)
-//                    },
-//                    negativeButtonAction = {
-//                        // Negative action (e.g., cancel)
-//                    }
-//                )
+                binding.statusText.text = getString(R.string.error_status)
                 DialogUtils.showSimpleOkDialog(
                     activity,
                     title = getString(R.string.dialog_title_error),
@@ -166,5 +112,4 @@ class SplashScreenActivity : AppCompatActivity() {
             else -> {}
         }
     }
-
 }

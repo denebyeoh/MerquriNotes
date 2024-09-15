@@ -56,6 +56,22 @@
     <string name="please_input_note_content_hint">Please input note content</string>
     <!---->
 
+    <!--Content Description-->
+    <string name="health_icon_content_description">Health icon</string>
+    <string name="life_icon_content_description">Life icon</string>
+    <string name="work_and_study_icon_content_description">Work and study icon</string>
+    <string name="recent_clock_icon_content_description">Recent clock icon</string>
+    <!---->
+
+    <!--Status-->
+    <string name="loading_status">Loading...</string>
+    <string name="load_completed_status">Load Completed</string>
+    <string name="error_status">Error</string>
+    <!---->
+
+    <string name="recently_created_notes">Recently created notes</string>
+
+
     <string-array name="category_array">
         <item>Work and Study</item>
         <item>Life</item>

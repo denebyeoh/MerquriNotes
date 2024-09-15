@@ -10,17 +10,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
-class SettingsViewModel @Inject constructor(repository: SettingsRepository) : BaseViewModel<SettingsRepository>(repository){
+class SettingsViewModel @Inject constructor(repository: SettingsRepository) :
+    BaseViewModel<SettingsRepository>(repository) {
 
     private val retrieveDeleteAllDataResponseInternal = MutableLiveData<ApiResource<Boolean>>()
-    val retrieveDeleteAllDataResponse : LiveData<ApiResource<Boolean>?>
+    val retrieveDeleteAllDataResponse: LiveData<ApiResource<Boolean>?>
         get() = retrieveDeleteAllDataResponseInternal
 
-    fun deleteAllContent(){
+    fun deleteAllContent() {
         retrieveDeleteAllDataResponseInternal.postValue(ApiResource.Loading)
-        viewModelScope.launch (Dispatchers.IO){
-            repository.deleteAllContent() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllContent {
                 retrieveDeleteAllDataResponseInternal.postValue(it)
             }
         }

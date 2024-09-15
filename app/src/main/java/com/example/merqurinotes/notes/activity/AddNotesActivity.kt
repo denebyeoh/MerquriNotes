@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.merqurinotes.R
 import com.example.merqurinotes.databinding.ActivityAddNotesBinding
-import com.example.merqurinotes.notes.common.response.RetrieveCategoryListResponse
 import com.example.merqurinotes.notes.viewmodel.AddNotesViewModel
 import com.example.merqurinotes.room.Content
 import com.example.merqurinotes.utils.api.ApiResource
@@ -40,10 +39,6 @@ class AddNotesActivity : AppCompatActivity() {
     private fun initViewModel() {
         val activity = this
         viewModel.apply {
-            retrieveListCategoryResponse.observe(
-                activity,
-                activity::onRetrieveCategoryListFromAPIResponse
-            )
             retrieveSaveNotesResponse.observe(
                 activity,
                 activity::onRetrieveSaveNotesResponse
@@ -83,44 +78,8 @@ class AddNotesActivity : AppCompatActivity() {
                     },
                 )
             }
-
             else -> {}
         }
-    }
-
-    private fun onRetrieveCategoryListFromAPIResponse(response: ApiResource<RetrieveCategoryListResponse>?) {
-        val activity = this@AddNotesActivity
-        when (response) {
-            is ApiResource.Loading -> {
-                DialogUtils.showLoadingDialog(activity)
-            }
-
-            is ApiResource.Success -> {
-                DialogUtils.shutDownLoadingDialog()
-                response.data.apply {
-                    updateDropDownList(response.data)
-                }
-            }
-
-            is ApiResource.Error -> {
-                DialogUtils.shutDownLoadingDialog()
-                DialogUtils.showSimpleOkDialog(
-                    activity,
-                    title = getString(R.string.dialog_title_error),
-                    message = getString(R.string.generic_error_msg),
-                    positiveButtonText = getString(R.string.dialog_button_ok),
-                    positiveButtonAction = {
-                        finish()
-                    },
-                )
-            }
-
-            else -> {}
-        }
-    }
-
-    private fun updateDropDownList(data: RetrieveCategoryListResponse) {
-
     }
 
     private fun initView() {
@@ -143,17 +102,14 @@ class AddNotesActivity : AppCompatActivity() {
                         },
                     )
                 } else {
-                    //val array = resources.getStringArray(R.array.category_array)
                     val inputContent = noteContentEt.text.toString()
                     val inputCategory = spinnerCategory.selectedItem.toString()
                     val content = Content(
                         category = inputCategory,
-                        //category = array.random(),
                         content = inputContent
                     )
                     viewModel.saveNotesToDB(content)
                 }
-
             }
         }
     }

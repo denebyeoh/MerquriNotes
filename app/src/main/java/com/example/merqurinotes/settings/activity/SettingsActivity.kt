@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.merqurinotes.R
@@ -14,7 +13,6 @@ import com.example.merqurinotes.settings.viewmodel.SettingsViewModel
 import com.example.merqurinotes.utils.api.ApiResource
 import com.example.merqurinotes.utils.dialog.DialogUtils
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
@@ -87,7 +85,7 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    fun intentToWeb(url:String){
+    private fun intentToWeb(url: String) {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 

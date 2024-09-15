@@ -17,6 +17,7 @@ import com.example.merqurinotes.notes.activity.AddNotesActivity
 import com.example.merqurinotes.room.Content
 import com.example.merqurinotes.settings.activity.SettingsActivity
 import com.example.merqurinotes.utils.api.ApiResource
+import com.example.merqurinotes.utils.dialog.DialogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +39,7 @@ class HomeFragment : Fragment() {
         initView()
         initViewModel()
     }
+
     override fun onResume() {
         super.onResume()
         viewModel.apply {
@@ -75,17 +77,13 @@ class HomeFragment : Fragment() {
     private fun initViewModel() {
         val activity = this@HomeFragment
         viewModel.apply {
-            retrieveCategoryListResponse.observe(
-                requireActivity(),
-                activity::onRetrieveCategoryFromDBResponse
-            )
             retrieveWorkStudyListResponse.observe(
                 requireActivity(),
                 activity::onRetrieveWorkStudyFromDBResponse
             )
             retrieveLifeListResponse.observe(
-                    requireActivity(),
-            activity::onRetrieveLifeFromDBResponse
+                requireActivity(),
+                activity::onRetrieveLifeFromDBResponse
             )
             retrieveHealthListResponse.observe(
                 requireActivity(),
@@ -105,8 +103,16 @@ class HomeFragment : Fragment() {
             }
 
             is ApiResource.Error -> {
-
+                DialogUtils.showSimpleOkDialog(
+                    requireActivity(),
+                    title = getString(R.string.dialog_title_error),
+                    message = getString(R.string.generic_error_msg),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                    },
+                )
             }
+
             else -> {}
         }
     }
@@ -122,8 +128,16 @@ class HomeFragment : Fragment() {
             }
 
             is ApiResource.Error -> {
-                
+                DialogUtils.showSimpleOkDialog(
+                    requireActivity(),
+                    title = getString(R.string.dialog_title_error),
+                    message = getString(R.string.generic_error_msg),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                    },
+                )
             }
+
             else -> {}
         }
     }
@@ -139,32 +153,23 @@ class HomeFragment : Fragment() {
             }
 
             is ApiResource.Error -> {
-
-            }
-            else -> {}
-        }
-    }
-
-    private fun onRetrieveCategoryFromDBResponse(response: ApiResource<List<Content>>?) {
-        when (response) {
-            is ApiResource.Loading -> {
-
+                DialogUtils.showSimpleOkDialog(
+                    requireActivity(),
+                    title = getString(R.string.dialog_title_error),
+                    message = getString(R.string.generic_error_msg),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                    },
+                )
             }
 
-            is ApiResource.Success -> {
-
-            }
-
-            is ApiResource.Error -> {
-
-            }
             else -> {}
         }
     }
 
     private fun updateHealthAdapter(data: List<Content>) {
         homeBinding.apply {
-            if(data.isEmpty())healthTitleContainer.visibility = View.GONE
+            if (data.isEmpty()) healthTitleContainer.visibility = View.GONE
             else healthTitleContainer.visibility = View.VISIBLE
             healthRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
             val adapter = HealthListAdapter(data)
@@ -174,7 +179,7 @@ class HomeFragment : Fragment() {
 
     private fun updateLifeAdapter(data: List<Content>) {
         homeBinding.apply {
-            if (data.isEmpty())homeBinding.lifeTitleContainer.visibility = View.GONE
+            if (data.isEmpty()) homeBinding.lifeTitleContainer.visibility = View.GONE
             else homeBinding.lifeTitleContainer.visibility = View.VISIBLE
             lifeRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
             val adapter = HealthListAdapter(data)
@@ -184,7 +189,7 @@ class HomeFragment : Fragment() {
 
     private fun updateWorkStudyAdapter(data: List<Content>) {
         homeBinding.apply {
-            if(data.isEmpty())homeBinding.workStudyTitleContainer.visibility = View.GONE
+            if (data.isEmpty()) homeBinding.workStudyTitleContainer.visibility = View.GONE
             else homeBinding.workStudyTitleContainer.visibility = View.VISIBLE
             workStudyRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
             val adapter = HealthListAdapter(data)

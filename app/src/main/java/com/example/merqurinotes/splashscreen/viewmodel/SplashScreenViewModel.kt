@@ -5,48 +5,38 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.merqurinotes.base.BaseViewModel
 import com.example.merqurinotes.room.Category
-import com.example.merqurinotes.notes.common.response.CategoryList
 import com.example.merqurinotes.splashscreen.repository.SplashScreenRepository
 import com.example.merqurinotes.utils.api.ApiResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
-class SplashScreenViewModel @Inject constructor(repository: SplashScreenRepository) : BaseViewModel<SplashScreenRepository>(repository){
+class SplashScreenViewModel @Inject constructor(repository: SplashScreenRepository) :
+    BaseViewModel<SplashScreenRepository>(repository) {
 
     private val retrieveInsertCategoryToDBResponseInternal = MutableLiveData<ApiResource<Boolean>>()
-    val retrieveInsertCategoryToDBResponse : LiveData<ApiResource<Boolean>?>
+    val retrieveInsertCategoryToDBResponse: LiveData<ApiResource<Boolean>?>
         get() = retrieveInsertCategoryToDBResponseInternal
 
-    private val retrieveDataResponseInternal = MutableLiveData<ApiResource<Boolean>>()
-    val retrieveDataResponse : LiveData<ApiResource<Boolean>?>
-        get() = retrieveDataResponseInternal
-
-    private val retrieveCategoryListResponseInternal = MutableLiveData<ApiResource<List<Category>>>()
-    val retrieveCategoryListResponse : MutableLiveData<ApiResource<List<Category>>>
+    private val retrieveCategoryListResponseInternal =
+        MutableLiveData<ApiResource<List<Category>>>()
+    val retrieveCategoryListResponse: MutableLiveData<ApiResource<List<Category>>>
         get() = retrieveCategoryListResponseInternal
 
-    fun insertCategoryToDB(){
+    fun insertCategoryToDB() {
         retrieveInsertCategoryToDBResponseInternal.postValue(ApiResource.Loading)
-        viewModelScope.launch (Dispatchers.IO){
-            repository.insertCategoryToDB() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertCategoryToDB {
                 retrieveInsertCategoryToDBResponseInternal.postValue(it)
             }
         }
     }
-    fun fetchDataFromAPI(){
-        retrieveDataResponseInternal.postValue(ApiResource.Loading)
-        viewModelScope.launch (Dispatchers.IO){
-            repository.fetchDataFromAPI {
-                retrieveDataResponseInternal.postValue(it)
-            }
-        }
-    }
 
-    fun fetchCategoryListFromDB(){
+    fun fetchCategoryListFromDB() {
         retrieveCategoryListResponseInternal.postValue(ApiResource.Loading)
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             repository.fetchCategoryListFromDB {
                 retrieveCategoryListResponseInternal.postValue(it)
             }

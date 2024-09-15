@@ -4,7 +4,7 @@ import com.example.merqurinotes.utils.json.JSON
 
 data class RetrieveCategoryListResponse(
     var categoryList: List<CategoryList>,
-){
+) {
     companion object {
         @JvmStatic
         fun createTestData(): RetrieveCategoryListResponse {
