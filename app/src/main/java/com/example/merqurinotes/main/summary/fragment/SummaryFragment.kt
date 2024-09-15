@@ -16,6 +16,7 @@ import com.example.merqurinotes.main.adapter.SummaryListAdapter
 import com.example.merqurinotes.main.viewmodel.MainViewModel
 import com.example.merqurinotes.notes.activity.AddNotesActivity
 import com.example.merqurinotes.utils.api.ApiResource
+import com.example.merqurinotes.utils.dialog.DialogUtils
 
 class SummaryFragment : Fragment() {
     private val viewModel: MainViewModel by lazy { ViewModelProvider(requireActivity())[MainViewModel::class.java] }
@@ -62,7 +63,14 @@ class SummaryFragment : Fragment() {
             }
 
             is ApiResource.Error -> {
-
+                DialogUtils.showSimpleOkDialog(
+                    requireActivity(),
+                    title = getString(R.string.dialog_title_error),
+                    message = getString(R.string.generic_error_msg),
+                    positiveButtonText = getString(R.string.dialog_button_ok),
+                    positiveButtonAction = {
+                    },
+                )
             }
 
             else -> {}

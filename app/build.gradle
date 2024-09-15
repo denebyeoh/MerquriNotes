@@ -41,18 +41,6 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    productFlavors {
-        create("free") {
-            dimension = "version"
-            applicationIdSuffix = ".free"
-            versionNameSuffix = "-free"
-        }
-        create("paid") {
-            dimension = "version"
-            applicationIdSuffix = ".paid"
-            versionNameSuffix = "-paid"
-        }
-    }
 }
 // Allow references to generated code
 kapt {

@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.merqurinotes.R
@@ -14,16 +16,14 @@ import com.example.merqurinotes.databinding.ListSummarizeCategoryItemBinding
 class SummaryListAdapter(private val mList: List<SummarizeData>) :
     RecyclerView.Adapter<SummaryListAdapter.ViewHolder>() {
 
-    // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_summarize_category_item, parent, false)
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ListSummarizeCategoryItemBinding.inflate(inflater, parent, false)
+        //val inflater = LayoutInflater.from(parent.context)
+        //val binding = ListSummarizeCategoryItemBinding.inflate(inflater, parent, false)
         return ViewHolder(view)
     }
 
-    // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val items = mList[position]
         holder.categoryTextView.text = items.category
@@ -55,7 +55,7 @@ class SummaryListAdapter(private val mList: List<SummarizeData>) :
                 )
             )
 
-            else -> ""
+            else -> {}
         }
     }
 
@@ -67,11 +67,16 @@ class SummaryListAdapter(private val mList: List<SummarizeData>) :
         val categoryTextView: TextView = this.itemView.findViewById(R.id.category_tv)
         val totalContentTextView: TextView = this.itemView.findViewById(R.id.total_content_tv)
         val categoryImageView: ImageView = this.itemView.findViewById(R.id.category_iv)
+        init {
+            val detailButton : AppCompatButton = this.itemView.findViewById(R.id.details_btn)
+            detailButton.setOnClickListener {
+                Toast.makeText(this.itemView.context,"Pressed",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 //    class ViewHolder(viewBinding: ListSummarizeCategoryItemBinding) : RecyclerView.ViewHolder(viewBinding.root) {
 //        //val imageView: ImageView = itemView.findViewById(R.id.imageview)
 //        //val textView: TextView = itemView.findViewById(R.id.textView)
-//
 //    }
 }

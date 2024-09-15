@@ -87,7 +87,7 @@
                             android:layout_marginStart="8dp"
                             android:text="@string/work_study_title"
                             android:textColor="@color/white"
-                            android:textSize="24sp"
+                            android:textSize="18sp"
                             app:layout_constraintStart_toEndOf="@+id/work_study_icon"
                             app:layout_constraintTop_toTopOf="@+id/work_study_title_container" />
                     </LinearLayout>
@@ -125,7 +125,7 @@
                             android:layout_marginStart="8dp"
                             android:text="@string/life_title"
                             android:textColor="@color/white"
-                            android:textSize="24sp"
+                            android:textSize="18sp"
                             app:layout_constraintStart_toEndOf="@+id/work_study_icon"
                             app:layout_constraintTop_toTopOf="@+id/work_study_title_container" />
                     </LinearLayout>
@@ -163,7 +163,7 @@
                             android:layout_marginStart="8dp"
                             android:text="@string/health_title"
                             android:textColor="@color/white"
-                            android:textSize="24sp"
+                            android:textSize="18sp"
                             app:layout_constraintStart_toEndOf="@+id/work_study_icon"
                             app:layout_constraintTop_toTopOf="@+id/work_study_title_container" />
                     </LinearLayout>

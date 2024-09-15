@@ -18,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/title_icon_back"
-            android:scaleX="0.9"
-            android:scaleY="0.9"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
             android:src="@drawable/work_study_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,14 +29,15 @@
             android:id="@+id/category_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="24sp"
+            android:layout_marginStart="8dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/category_iv"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,10 +46,10 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/details_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/button_save_delete_background"
-                android:padding="16dp"
+                android:paddingVertical="10dp"
                 android:text="@string/detail"
                 android:textColor="@android:color/white" />
         </LinearLayout>
@@ -74,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textColor="?android:textColorPrimary"
-            android:textSize="26sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
