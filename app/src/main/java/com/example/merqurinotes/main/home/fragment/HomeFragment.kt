@@ -122,7 +122,7 @@ class HomeFragment : Fragment() {
             }
 
             is ApiResource.Error -> {
-
+                
             }
             else -> {}
         }
@@ -163,38 +163,32 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateHealthAdapter(data: List<Content>) {
-        if(data.isEmpty()){
-            homeBinding.healthTitleContainer.visibility = View.GONE
-        }else{
-            homeBinding.apply {
-                healthRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
-                val adapter = HealthListAdapter(data)
-                healthRecyclerView.adapter = adapter
-            }
+        homeBinding.apply {
+            if(data.isEmpty())healthTitleContainer.visibility = View.GONE
+            else healthTitleContainer.visibility = View.VISIBLE
+            healthRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+            val adapter = HealthListAdapter(data)
+            healthRecyclerView.adapter = adapter
         }
     }
 
     private fun updateLifeAdapter(data: List<Content>) {
-        if (data.isEmpty()){
-            homeBinding.lifeTitleContainer.visibility = View.GONE
-        }else{
-            homeBinding.apply {
-                lifeRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
-                val adapter = HealthListAdapter(data)
-                lifeRecyclerView.adapter = adapter
-            }
+        homeBinding.apply {
+            if (data.isEmpty())homeBinding.lifeTitleContainer.visibility = View.GONE
+            else homeBinding.lifeTitleContainer.visibility = View.VISIBLE
+            lifeRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+            val adapter = HealthListAdapter(data)
+            lifeRecyclerView.adapter = adapter
         }
     }
 
     private fun updateWorkStudyAdapter(data: List<Content>) {
-        if(data.isEmpty()){
-            homeBinding.workStudyTitleContainer.visibility = View.GONE
-        }else{
-            homeBinding.apply {
-                workStudyRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
-                val adapter = HealthListAdapter(data)
-                workStudyRecyclerView.adapter = adapter
-            }
+        homeBinding.apply {
+            if(data.isEmpty())homeBinding.workStudyTitleContainer.visibility = View.GONE
+            else homeBinding.workStudyTitleContainer.visibility = View.VISIBLE
+            workStudyRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+            val adapter = HealthListAdapter(data)
+            workStudyRecyclerView.adapter = adapter
         }
     }
 }
